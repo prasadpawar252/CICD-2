@@ -10,7 +10,8 @@ on:
 
 
 jobs:
-    build & test:
+    build-and-test:
+        if: github.event.pull_request.merged == true
         runs-on: ubuntu-latest
         
         steps:
@@ -20,4 +21,12 @@ jobs:
             - name: "setup node"
               uses: actions/setup-node@v4
               with:
-                node-version: 21
+                node-version: 20
+
+            - name: "install dependencies"
+              run: npm install  
+
+            - name: "run build"
+              run: npm run build
+
+            
